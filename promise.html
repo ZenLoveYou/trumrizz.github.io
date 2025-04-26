@@ -2,23 +2,32 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Hứa với cậu 💍</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Lời hứa 💍</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <canvas id="fireworks"></canvas> <!-- Pháo hoa -->
+<div class="card">
+  <h1>Khánh Hà ơi 💘</h1>
+  <p>
+    Tớ hứa sẽ luôn ở bên cậu.<br>
+    Tớ hứa sẽ làm cậu cười mỗi ngày.<br>
+    Tớ hứa sẽ yêu cậu bằng cả trái tim này.<br><br>
+    Cảm ơn cậu đã đồng ý làm người yêu tớ! 🥰
+  </p>
+</div>
 
-  <div class="card">
-    <h1>Những điều tớ hứa với Khánh Hà 🌟</h1>
-    <ul style="text-align: left; font-size: 1.2rem;">
-      <li>Luôn yêu thương cậu bằng cả trái tim này 💘</li>
-      <li>Luôn bên cạnh cậu, dù chuyện gì xảy ra 💪</li>
-      <li>Không bao giờ làm cậu buồn 🥺</li>
-      <li>Mãi mãi chỉ có mình cậu trong tim 🫶</li>
-    </ul>
-  </div>
+<script>
+  // Hiệu ứng pháo hoa ăn mừng
+  setInterval(() => {
+    let heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 2 + 2) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+  }, 200);
+</script>
 
-  <script src="fireworks.js"></script>
 </body>
 </html>
