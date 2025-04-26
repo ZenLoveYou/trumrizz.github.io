@@ -2,21 +2,39 @@ const acceptBtn = document.getElementById('acceptBtn');
 const declineBtn = document.getElementById('declineBtn');
 const bgMusic = document.getElementById('bgMusic');
 
-// Bấm "Đồng ý" -> Chuyển trang hoặc hiện thông điệp
+// Đồng ý -> chuyển trang Promise
 acceptBtn.addEventListener('click', () => {
-  window.location.href = "promise.html"; // Chuyển tới 1 trang promise.html (hứa hẹn)
+  setTimeout(() => {
+    window.location.href = "promise.html";
+  }, 300);
 });
 
-// Bấm "Từ chối" -> Nút chạy lung tung
+// Từ chối -> nút chạy khắp nơi
 declineBtn.addEventListener('mouseover', () => {
   const x = Math.random() * (window.innerWidth - declineBtn.offsetWidth);
   const y = Math.random() * (window.innerHeight - declineBtn.offsetHeight);
   declineBtn.style.position = 'absolute';
   declineBtn.style.left = `${x}px`;
   declineBtn.style.top = `${y}px`;
+  declineBtn.style.transition = '0.3s';
+  declineBtn.style.transform = `rotate(${Math.random()*360}deg)`;
 });
 
-// Đảm bảo nhạc phát tự động
+// Tạo trái tim bay
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+  document.getElementById('hearts').appendChild(heart);
+  
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);
+}
+setInterval(createHeart, 300);
+
+// Auto play nhạc
 setTimeout(() => {
-  bgMusic.play().catch(() => {});
+  bgMusic.play().catch(()=>{});
 }, 1000);
