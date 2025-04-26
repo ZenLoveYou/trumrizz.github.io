@@ -1,40 +1,41 @@
-const acceptBtn = document.getElementById('acceptBtn');
-const declineBtn = document.getElementById('declineBtn');
-const bgMusic = document.getElementById('bgMusic');
+// Story gõ từng chữ
+const storyText = "Tớ thích cậu từ lâu lắm rồi... Ngày nào cũng nghĩ về cậu... Cậu là người duy nhất khiến tớ cười như một đứa ngốc. Khánh Hà à, làm người yêu tớ nhaaaa 🥺❤️";
+const storyEl = document.getElementById('story');
+let index = 0;
 
-// Đồng ý -> chuyển trang Promise
-acceptBtn.addEventListener('click', () => {
-  setTimeout(() => {
-    window.location.href = "promise.html";
-  }, 300);
-});
+function typeStory() {
+  if (index < storyText.length) {
+    storyEl.innerHTML += storyText.charAt(index);
+    index++;
+    setTimeout(typeStory, 50);
+  }
+}
+typeStory();
 
-// Từ chối -> nút chạy khắp nơi
-declineBtn.addEventListener('mouseover', () => {
-  const x = Math.random() * (window.innerWidth - declineBtn.offsetWidth);
-  const y = Math.random() * (window.innerHeight - declineBtn.offsetHeight);
-  declineBtn.style.position = 'absolute';
-  declineBtn.style.left = `${x}px`;
-  declineBtn.style.top = `${y}px`;
-  declineBtn.style.transition = '0.3s';
-  declineBtn.style.transform = `rotate(${Math.random()*360}deg)`;
-});
+// Music auto play
+setTimeout(() => {
+  document.getElementById('bgMusic').play().catch(() => {});
+}, 1000);
 
-// Tạo trái tim bay
-function createHeart() {
-  const heart = document.createElement('div');
+// Tạo tim bay
+setInterval(() => {
+  let heart = document.createElement('div');
   heart.className = 'heart';
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = Math.random() * 2 + 3 + "s";
-  document.getElementById('hearts').appendChild(heart);
-  
-  setTimeout(() => {
-    heart.remove();
-  }, 5000);
-}
-setInterval(createHeart, 300);
+  heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}, 300);
 
-// Auto play nhạc
-setTimeout(() => {
-  bgMusic.play().catch(()=>{});
-}, 1000);
+// Nút "Không thể từ chối" né
+const noBtn = document.getElementById('noBtn');
+noBtn.addEventListener('mouseover', () => {
+  noBtn.style.top = Math.random() * 80 + 'vh';
+  noBtn.style.left = Math.random() * 80 + 'vw';
+  noBtn.style.position = 'absolute';
+});
+
+// Nút "Đồng ý"
+document.getElementById('yesBtn').onclick = () => {
+  window.location.href = "promise.html";
+}
